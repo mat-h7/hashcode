@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -53,15 +54,24 @@ public class Slide {
     }
 
     public int calculateScore(Slide other) {
-        Set<String> copyOf1 = Set.copyOf(tags);
-        copyOf1.removeAll(other.getTags());
+        int uniqueS1 = 0, uniqueS2 = 0, intersection = 0;
+        Set<String> combined = new HashSet<>();
 
-        Set<String> copyOf2 = Set.copyOf(other.getTags());
-        copyOf2.removeAll(tags);
+        combined.addAll(tags);
+        combined.addAll(other.getTags());
 
-        Set<String> intersection = Set.copyOf(tags);
-        intersection.retainAll(other.getTags());
+        for (String s:combined) {
+            if (tags.contains(s) && other.getTags().contains(s)) {
+                intersection++;
+            }
+            else if(tags.contains(s)) {
+                uniqueS1++;
+            }
+            else {
+                uniqueS2++;
+            }
+        }
 
-        return Math.min(copyOf1.size(), Math.min(copyOf2.size(), intersection.size()));
+        return Math.min(uniqueS1, Math.min(uniqueS2, intersection));
     }
 }
