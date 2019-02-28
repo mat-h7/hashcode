@@ -15,6 +15,8 @@ public class Processor {
         this.horizontalImagesSet = horizontalImages;
         if(!verticalImages.isEmpty()){
             this.verticalQueue = createQueue(verticalImagesSet);
+        } else {
+            verticalQueue = new ArrayDeque<>();
         }
         //this.horizontalQueue = createQueue(horizontalImagesSet);
         createSlides();

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -42,5 +43,9 @@ public class Main {
             }
         }
         Processor processor = new Processor(V, H);
+
+        OutputHandler handler = new OutputHandler(processor.generateSlideshow(), new PrintStream(new File("/home/dmv18/HashCode19/hashcode/Data/output.txt")));
     }
+
+
 }
