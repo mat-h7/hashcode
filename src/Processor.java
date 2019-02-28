@@ -6,7 +6,9 @@ public class Processor {
     private Set<Image> horizontalImagesSet;
     private Queue<Image> verticalQueue;
     private Queue<Image> horizontalQueue;
-    private Set<Slide> slides = new HashSet<>();
+    private Set<Slide> verticalSlides = new HashSet<>();
+    private Set<Slide> horizontalSlides = new HashSet<>();
+
 
     public Processor(Set<Image> verticalImages, Set<Image> horizontalImages){
         this.verticalImagesSet = verticalImages;
@@ -17,12 +19,17 @@ public class Processor {
     }
 
     public void createSlides(){
-        Queue<Image> queue = (ArrayDeque<Image>) verticalQueue;
-        while(!queue.isEmpty()){
-            Image first = ((ArrayDeque<Image>) queue).getFirst();
-            Image last = ((ArrayDeque<Image>) queue).getLast();
-            slides.add(new Slide(first, last));
+        Queue<Image> queueVertical = verticalQueue;
+        while(!queueVertical.isEmpty()){
+            Image first = ((ArrayDeque<Image>) queueVertical).getFirst();
+            ((ArrayDeque<Image>) queueVertical).removeFirst();
+            Image last = ((ArrayDeque<Image>) queueVertical).getLast();
+            ((ArrayDeque<Image>) queueVertical).removeLast();
+            verticalSlides.add(new Slide(first, last));
         }
+
+        Queue<Image> queueHorizontal = horizontalQueue;
+        queueHorizontal.forEach(e -> horizontalSlides.add(new Slide(e)));
     }
 
     private Queue<Image> createQueue(Set<Image> set){
@@ -43,8 +50,11 @@ public class Processor {
         }
     };
 
-    public Set<Slide> getSlides(){
-        return slides;
+    public Set<Slide> getVerticalSlides(){
+        return verticalSlides;
     }
-    
+
+    public Set<Slide> getHorizontalSlides(){
+        return horizontalSlides;
+    }
 }
