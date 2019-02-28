@@ -22,7 +22,9 @@ public class Processor {
         Queue<Image> queueVertical = verticalQueue;
         while(!queueVertical.isEmpty()){
             Image first = ((ArrayDeque<Image>) queueVertical).getFirst();
+            ((ArrayDeque<Image>) queueVertical).removeFirst();
             Image last = ((ArrayDeque<Image>) queueVertical).getLast();
+            ((ArrayDeque<Image>) queueVertical).removeLast();
             verticalSlides.add(new Slide(first, last));
         }
 
