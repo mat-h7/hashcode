@@ -48,8 +48,20 @@ public class Slide {
         return ids;
     }
 
-    public int calculateScore(Slide other) {
-        int score = 0;
+    public Set<String> getTags() {
+        return tags;
+    }
 
+    public int calculateScore(Slide other) {
+        Set<String> copyOf1 = Set.copyOf(tags);
+        copyOf1.removeAll(other.getTags());
+
+        Set<String> copyOf2 = Set.copyOf(other.getTags());
+        copyOf2.removeAll(tags);
+
+        Set<String> intersection = Set.copyOf(tags);
+        intersection.retainAll(other.getTags());
+
+        return Math.min(copyOf1.size(), Math.min(copyOf2.size(), intersection.size()));
     }
 }
