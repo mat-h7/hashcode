@@ -29,7 +29,4 @@ public class Image {
         return id;
     }
 
-    public enum Orientation{
-        H, V
-    }
 }
