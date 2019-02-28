@@ -8,11 +8,13 @@ public class Slide {
     private Image img1, img2;
     private Type type;
     private Slide next;
-    private int id;
+    private int[] id;
 
     public Slide(Image image) {
         img1 = image;
         type = Type.Horizontal;
+        id = new int[1];
+        id[0] = image.
     }
 
     public Slide(Image img1, Image img2) {
