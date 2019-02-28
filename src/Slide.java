@@ -1,21 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Slide {
 
     private Image img1, img2;
     private Orientation orientation;
     private Slide next;
+    private Set<String> tags;
 
-    public Slide(Image image) {
-        img1 = image;
+    public Slide(Image img) {
+        this.img1 = img;
         orientation = Orientation.H;
+        tags = img.getTags();
     }
 
     public Slide(Image img1, Image img2) {
         this.img1 = img1;
         this.img2 = img2;
         orientation = Orientation.V;
+        tags = img1.getTags();
+        tags.addAll(img2.getTags());
     }
 
     public Image getImg1() {
@@ -41,5 +46,10 @@ public class Slide {
             ids.add(img2.getId());
         }
         return ids;
+    }
+
+    public int calculateScore(Slide other) {
+        int score = 0;
+
     }
 }
