@@ -9,14 +9,28 @@ import java.util.Set;
 public class OutputHandler {
 
     private PrintStream printStream;
-    private OutputStream outputStream;
+    private PrintStream output;
     private Set<Slide> verticalSlides;
     private Set<Slide> horizontalSlides;
 
-    public OutputHandler(Set<Slide> verticalSlides, Set<Slide> horizontalSlides, PrintStream outputStream){
+    public OutputHandler(Set<Slide> verticalSlides, Set<Slide> horizontalSlides, PrintStream output) {
         this.verticalSlides = verticalSlides;
         this.horizontalSlides = horizontalSlides;
-        this.outputStream = outputStream;
+        this.output = output;
+        verticalSlides.addAll(horizontalSlides);
+        output(verticalSlides);
+    }
+
+    public void output(Set<Slide> slides) {
+        output.println(slides.size());
+        for (Slide s : slides) {
+            if(s.getId().size() == 2){
+                output.print(s.getId().get(0) + " ");
+                output.print(s.getId().get(1) + "\n");
+            }else{
+                output.print(s.getId().get(0) + "\n");
+            }
+        }
     }
 
     /*public OutputHandler(String path, List<Slide> slides) {
@@ -31,7 +45,6 @@ public class OutputHandler {
             System.out.println("outputStream is null");
         }
     }*/
-
 
 
 }
