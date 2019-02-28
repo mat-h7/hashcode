@@ -18,6 +18,7 @@ public class Main {
         if (input.nextInt() == 0) {
             return;
         }
+
         while (input.hasNext()) {
             switch(input.next()) {
                 case "H":
