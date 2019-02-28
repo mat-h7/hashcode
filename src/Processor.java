@@ -61,4 +61,41 @@ public class Processor {
     public Set<Slide> getHorizontalSlides(){
         return horizontalSlides;
     }
+
+    private Slide getFirst() {
+        Slide slide = null;
+        for (Slide s:horizontalSlides) {
+            horizontalSlides.remove(s);
+            slide = s;
+            break;
+        }
+        return slide;
+    }
+
+    public List<Slide> generateSlideshow() {
+        List<Slide> slideshow = new ArrayList<>();
+        Set<Slide> combined = new HashSet<>();
+        slideshow.add(getFirst());
+        combined.addAll(horizontalSlides);
+        combined.addAll(verticalSlides);
+
+        while (!combined.isEmpty()) {
+            Slide bestSlide = null;
+            int maxScore = 0;
+            for (Slide s:combined) {
+                Slide current = slideshow.get(slideshow.size() - 1);
+                if (current.calculateScore(s) > maxScore) {
+                    maxScore = current.calculateScore(s);
+                    bestSlide = s;
+                }
+            }
+            slideshow.add(bestSlide);
+            combined.remove(bestSlide);
+        }
+
+        return slideshow;
+
+    }
+
+
 }
