@@ -74,6 +74,43 @@ public class Processor {
         return slide;
     }
 
+    private static Comparator<Image> slideComparator = new Comparator<Image>() {
+        @Override
+        public int compare(Image o1, Image o2) {
+            return (int) o1.getId() - o2.getId();
+        }
+    };
+
+    public List<Slide> generateSlides(){
+        List<Slide> slides = new ArrayList<>();
+        slides.addAll(verticalSlides);
+        slides.addAll(horizontalSlides);
+        Collections.sort(slides, new Comparator<Slide>() {
+            @Override
+            public int compare(Slide o1, Slide o2) {
+                return o1.getTags().size() - o2.getTags().size();
+            }
+        });
+        return slides;
+    }
+
+    public List<Slide> generateSlides2(){
+        List<Slide> slides = generateSlides();
+        List<Slide> slides1 = slides.subList(0, slides.size()/2);
+        List<Slide> slides2 = slides.subList(slides.size() / 2, slides.size());
+        List<Slide> slides3 = new ArrayList<>();
+        for(int i = 0; i < Math.max(slides1.size(), slides2.size()); i++){
+            if(i < slides1.size()){
+                slides3.add(slides1.get(i));
+            }
+            if(i < slides2.size()){
+                slides3.add(slides2.get(i));
+
+            }
+        }
+        return slides3;
+    }
+
     public List<Slide> generateSlideshow() {
         List<Slide> slideshow = new ArrayList<>();
         Set<Slide> combined = new HashSet<>();

@@ -15,20 +15,20 @@ public class Main {
         Set<Image> V = new HashSet<>();
         Set<Image> H = new HashSet<>();
 
-        input = new Scanner(new File(args[0]));
+        input = new Scanner(new File(args[4]));
         if (input.nextInt() == 0) {
             return;
         }
 
         while (input.hasNext()) {
-            switch(input.next()) {
+            switch (input.next()) {
                 case "H":
                     numOfTags = input.nextInt();
                     Set<String> setH = new HashSet<>();
                     for (int i = 0; i < numOfTags; i++) {
                         setH.add(input.next());
                     }
-                    Image imageH = new Image(Orientation.H,index,setH);
+                    Image imageH = new Image(Orientation.H, index, setH);
                     H.add(imageH);
                     index++;
                     break;
@@ -38,12 +38,12 @@ public class Main {
                     for (int i = 0; i < numOfTags; i++) {
                         setV.add(input.next());
                     }
-                    Image imageV = new Image(Orientation.V,index, setV);
+                    Image imageV = new Image(Orientation.V, index, setV);
                     V.add(imageV);
                     index++;
             }
         }
         Processor processor = new Processor(V, H);
-        OutputHandler handler = new OutputHandler(processor.getVerticalSlides(), processor.getHorizontalSlides(), new PrintStream(new File("Data/output5.txt")));
+        OutputHandler handler = new OutputHandler(processor.generateSlides2(), new PrintStream(new File("Data/outputE.txt")));
     }
 }
