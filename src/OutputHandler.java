@@ -18,7 +18,7 @@ public class OutputHandler {
         this.horizontalSlides = horizontalSlides;
         this.output = output;
         verticalSlides.addAll(horizontalSlides);
-        //output(verticalSlides);
+        output(verticalSlides);
     }
 
     public OutputHandler(List<Slide> slides, PrintStream output){
@@ -37,7 +37,7 @@ public class OutputHandler {
             }
         }
     }
-    /*public void output(Set<Slide> slides) {
+    public void output(Set<Slide> slides) {
         output.println(slides.size());
         for (Slide s : slides) {
             if(s.getId().size() == 2){

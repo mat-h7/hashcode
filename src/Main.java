@@ -19,6 +19,7 @@ public class Main {
         if (input.nextInt() == 0) {
             return;
         }
+
         while (input.hasNext()) {
             switch(input.next()) {
                 case "H":
@@ -44,7 +45,7 @@ public class Main {
         }
         Processor processor = new Processor(V, H);
 
-        OutputHandler handler = new OutputHandler(processor.generateSlideshow(), new PrintStream(new File("/home/dmv18/HashCode19/hashcode/Data/output.txt")));
+        OutputHandler handler = new OutputHandler(processor.getVerticalSlides(), processor.getHorizontalSlides(), new PrintStream(new File("Data/output5.txt")));
     }
 
 
