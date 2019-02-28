@@ -14,7 +14,7 @@ public class Processor {
         this.verticalImagesSet = verticalImages;
         this.horizontalImagesSet = horizontalImages;
         this.verticalQueue = createQueue(verticalImagesSet);
-        this.horizontalQueue = createQueue(horizontalImagesSet);
+        //this.horizontalQueue = createQueue(horizontalImagesSet);
         createSlides();
     }
 
@@ -28,8 +28,8 @@ public class Processor {
             verticalSlides.add(new Slide(first, last));
         }
 
-        Queue<Image> queueHorizontal = horizontalQueue;
-        queueHorizontal.forEach(e -> horizontalSlides.add(new Slide(e)));
+        Set<Image> setHorizontal = horizontalImagesSet;
+        setHorizontal.forEach(e -> horizontalSlides.add(new Slide(e)));
     }
 
     private Queue<Image> createQueue(Set<Image> set){
