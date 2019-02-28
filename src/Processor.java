@@ -81,11 +81,12 @@ public class Processor {
         combined.addAll(horizontalSlides);
         combined.addAll(verticalSlides);
 
+        System.out.println(verticalSlides.size());
         while (!combined.isEmpty()) {
             Slide bestSlide = null;
             int maxScore = 0;
+            Slide current = slideshow.get(slideshow.size() - 1);
             for (Slide s:combined) {
-                Slide current = slideshow.get(slideshow.size() - 1);
                 if (current.calculateScore(s) > maxScore) {
                     maxScore = current.calculateScore(s);
                     bestSlide = s;
@@ -94,7 +95,6 @@ public class Processor {
             slideshow.add(bestSlide);
             combined.remove(bestSlide);
         }
-
         return slideshow;
     }
 }
