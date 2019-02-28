@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -43,5 +44,6 @@ public class Main {
             }
         }
         Processor processor = new Processor(V, H);
+        OutputHandler handler = new OutputHandler(processor.getVerticalSlides(), processor.getHorizontalSlides(), new PrintStream(new File("Data/output5.txt")));
     }
 }
