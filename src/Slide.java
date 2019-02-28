@@ -4,18 +4,18 @@ import java.util.List;
 public class Slide {
 
     private Image img1, img2;
-    private Image.Orientation orientation;
+    private Orientation orientation;
     private Slide next;
 
     public Slide(Image image) {
         img1 = image;
-        orientation = Image.Orientation.H;
+        orientation = Orientation.H;
     }
 
     public Slide(Image img1, Image img2) {
         this.img1 = img1;
         this.img2 = img2;
-        orientation = Image.Orientation.V;
+        orientation = Orientation.V;
     }
 
     public Image getImg1() {
@@ -26,7 +26,7 @@ public class Slide {
         return img2;
     }
 
-    public Image.Orientation getOrientation() {
+    public Orientation getOrientation() {
         return orientation;
     }
 
