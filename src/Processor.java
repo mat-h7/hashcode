@@ -13,19 +13,23 @@ public class Processor {
     public Processor(Set<Image> verticalImages, Set<Image> horizontalImages){
         this.verticalImagesSet = verticalImages;
         this.horizontalImagesSet = horizontalImages;
-        this.verticalQueue = createQueue(verticalImagesSet);
+        if(!verticalImages.isEmpty()){
+            this.verticalQueue = createQueue(verticalImagesSet);
+        }
         //this.horizontalQueue = createQueue(horizontalImagesSet);
         createSlides();
     }
 
     public void createSlides(){
-        Queue<Image> queueVertical = verticalQueue;
-        while(!queueVertical.isEmpty()){
-            Image first = ((ArrayDeque<Image>) queueVertical).getFirst();
-            ((ArrayDeque<Image>) queueVertical).removeFirst();
-            Image last = ((ArrayDeque<Image>) queueVertical).getLast();
-            ((ArrayDeque<Image>) queueVertical).removeLast();
-            verticalSlides.add(new Slide(first, last));
+        if(!verticalQueue.isEmpty()){
+            Queue<Image> queueVertical = verticalQueue;
+            while(!queueVertical.isEmpty()){
+                Image first = ((ArrayDeque<Image>) queueVertical).getFirst();
+                ((ArrayDeque<Image>) queueVertical).removeFirst();
+                Image last = ((ArrayDeque<Image>) queueVertical).getLast();
+                ((ArrayDeque<Image>) queueVertical).removeLast();
+                verticalSlides.add(new Slide(first, last));
+            }
         }
 
         Set<Image> setHorizontal = horizontalImagesSet;
