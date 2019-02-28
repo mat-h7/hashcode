@@ -90,8 +90,5 @@ public class Processor {
         }
 
         return slideshow;
-
     }
-
-
 }
