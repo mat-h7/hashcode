@@ -17,6 +17,8 @@ public class OutputHandler {
         this.verticalSlides = verticalSlides;
         this.horizontalSlides = horizontalSlides;
         this.output = output;
+        verticalSlides.addAll(horizontalSlides);
+        output(verticalSlides);
     }
 
     public void output(Set<Slide> slides) {
