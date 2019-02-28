@@ -1,26 +1,21 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Slide {
 
-    private enum Type {
-        Horizontal,
-        Vertical
-    }
-
     private Image img1, img2;
-    private Type type;
+    private Image.Orientation orientation;
     private Slide next;
-    private int[] id;
 
     public Slide(Image image) {
         img1 = image;
-        type = Type.Horizontal;
-        id = new int[1];
-        id[0] = image.
+        orientation = Image.Orientation.H;
     }
 
     public Slide(Image img1, Image img2) {
         this.img1 = img1;
         this.img2 = img2;
-        type = Type.Vertical;
+        orientation = Image.Orientation.V;
     }
 
     public Image getImg1() {
@@ -31,15 +26,20 @@ public class Slide {
         return img2;
     }
 
-    public Type getType() {
-        return type;
+    public Image.Orientation getOrientation() {
+        return orientation;
     }
 
     public Slide getNext() {
         return next;
     }
 
-    public int getId() {
-        return id;
+    public List<Integer> getId() {
+        List<Integer> ids = new ArrayList<>();
+        ids.add(img1.getId());
+        if (img2 != null) {
+            ids.add(img2.getId());
+        }
+        return ids;
     }
 }
