@@ -18,10 +18,26 @@ public class OutputHandler {
         this.horizontalSlides = horizontalSlides;
         this.output = output;
         verticalSlides.addAll(horizontalSlides);
-        output(verticalSlides);
+        //output(verticalSlides);
     }
 
-    public void output(Set<Slide> slides) {
+    public OutputHandler(List<Slide> slides, PrintStream output){
+        this.output = output;
+        output(slides);
+    }
+
+    public void output(List<Slide> slides){
+        output.println(slides.size());
+        for (Slide s : slides) {
+            if(s.getId().size() == 2){
+                output.print(s.getId().get(0) + " ");
+                output.print(s.getId().get(1) + "\n");
+            }else{
+                output.print(s.getId().get(0) + "\n");
+            }
+        }
+    }
+    /*public void output(Set<Slide> slides) {
         output.println(slides.size());
         for (Slide s : slides) {
             if(s.getId().size() == 2){
