@@ -44,6 +44,6 @@ public class Main {
             }
         }
         Processor processor = new Processor(V, H);
-        OutputHandler handler = new OutputHandler(processor.generateSlides2(), new PrintStream(new File("Data/outputE.txt")));
+        OutputHandler handler = new OutputHandler(processor.generateSlides(), new PrintStream(new File("Data/outputE.txt")));
     }
 }
