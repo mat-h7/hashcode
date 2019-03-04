@@ -1,4 +1,6 @@
+import javax.management.StringValueExp;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Processor {
     private Scanner input;
@@ -8,6 +10,7 @@ public class Processor {
     private Queue<Image> horizontalQueue;
     private Set<Slide> verticalSlides = new HashSet<>();
     private Set<Slide> horizontalSlides = new HashSet<>();
+    private List<Slide> slideshow;
 
 
     public Processor(Set<Image> verticalImages, Set<Image> horizontalImages){
@@ -65,37 +68,30 @@ public class Processor {
         return horizontalSlides;
     }
 
-    private Slide getFirst() {
-        Slide slide = null;
-        for (Slide s:horizontalSlides) {
-            horizontalSlides.remove(s);
-            slide = s;
-            break;
+    public int[][] generateAdjacencyMatrix() {
+        Set<Slide> allSlides = new HashSet<>();
+        allSlides.addAll(Set.copyOf(getVerticalSlides()));
+        allSlides.addAll(Set.copyOf(getHorizontalSlides()));
+
+        int[][] adjacencyMatrix = new int[allSlides.size()][allSlides.size()];
+
+        int i = 0;
+        for (Slide s:allSlides) {
+            int j = 0;
+            for (Slide p:allSlides) {
+                if (adjacencyMatrix[i][j] == 0) {
+                    adjacencyMatrix[i][j] = s.calculateScore(p);
+                    adjacencyMatrix[j][i] = s.calculateScore(p);
+                }
+                j++;
+            }
+            i++;
         }
-        return slide;
+        return adjacencyMatrix;
+
     }
 
-    public List<Slide> generateSlideshow() {
-        List<Slide> slideshow = new ArrayList<>();
-        Set<Slide> combined = new HashSet<>();
-        slideshow.add(getFirst());
-        combined.addAll(horizontalSlides);
-        combined.addAll(verticalSlides);
-
-        System.out.println(verticalSlides.size());
-        while (!combined.isEmpty()) {
-            Slide bestSlide = null;
-            int maxScore = 0;
-            Slide current = slideshow.get(slideshow.size() - 1);
-            for (Slide s:combined) {
-                if (current.calculateScore(s) > maxScore) {
-                    maxScore = current.calculateScore(s);
-                    bestSlide = s;
-                }
-            }
-            slideshow.add(bestSlide);
-            combined.remove(bestSlide);
-        }
+    public List<Slide> getSlideshow() {
         return slideshow;
     }
 }

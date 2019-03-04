@@ -57,8 +57,14 @@ public class Slide {
         int uniqueS1 = 0, uniqueS2 = 0, intersection = 0;
         Set<String> combined = new HashSet<>();
 
-        combined.addAll(tags);
-        combined.addAll(other.getTags());
+
+        for (String s:tags) {
+            combined.add(s);
+        }
+
+        for (String s:other.getTags()) {
+            combined.add(s);
+        }
 
         for (String s:combined) {
             if (tags.contains(s) && other.getTags().contains(s)) {
