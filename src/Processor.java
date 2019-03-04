@@ -13,23 +13,21 @@ public class Processor {
     private List<Slide> slideshow;
 
 
-    public Processor(Set<Image> verticalImages, Set<Image> horizontalImages){
+    public Processor(Set<Image> verticalImages, Set<Image> horizontalImages) {
         this.verticalImagesSet = verticalImages;
         this.horizontalImagesSet = horizontalImages;
-        if(!verticalImages.isEmpty()){
+        if (!verticalImages.isEmpty()) {
             this.verticalQueue = createQueue(verticalImagesSet);
-
         } else {
             verticalQueue = new ArrayDeque<>();
         }
-        //this.horizontalQueue = createQueue(horizontalImagesSet);
         createSlides();
     }
 
-    public void createSlides(){
-        if(!verticalQueue.isEmpty()){
+    public void createSlides() {
+        if (!verticalQueue.isEmpty()) {
             Queue<Image> queueVertical = verticalQueue;
-            while(!queueVertical.isEmpty()){
+            while (!queueVertical.isEmpty()) {
                 Image first = ((ArrayDeque<Image>) queueVertical).getFirst();
                 ((ArrayDeque<Image>) queueVertical).removeFirst();
                 Image last = ((ArrayDeque<Image>) queueVertical).getLast();
@@ -42,13 +40,11 @@ public class Processor {
         setHorizontal.forEach(e -> horizontalSlides.add(new Slide(e)));
     }
 
-    private Queue<Image> createQueue(Set<Image> set){
+    private Queue<Image> createQueue(Set<Image> set) {
         Queue<Image> pQueue = new PriorityQueue<>(set.size(), idComparator);
         pQueue.addAll(set);
         Queue<Image> result = new ArrayDeque<>();
         result.addAll(pQueue);
-        System.out.println(((ArrayDeque<Image>) result).getLast().getId());
-        System.out.println(((ArrayDeque<Image>) result).getFirst().getId());
 
         return result;
     }
@@ -60,13 +56,14 @@ public class Processor {
         }
     };
 
-    public Set<Slide> getVerticalSlides(){
+    public Set<Slide> getVerticalSlides() {
         return verticalSlides;
     }
 
-    public Set<Slide> getHorizontalSlides(){
+    public Set<Slide> getHorizontalSlides() {
         return horizontalSlides;
     }
+
 
     public int[][] generateAdjacencyMatrix() {
         Set<Slide> allSlides = new HashSet<>();
@@ -89,7 +86,6 @@ public class Processor {
         }
         return adjacencyMatrix;
 
-    }
 
     public List<Slide> getSlideshow() {
         return slideshow;

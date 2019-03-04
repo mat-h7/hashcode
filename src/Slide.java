@@ -66,14 +66,12 @@ public class Slide {
             combined.add(s);
         }
 
-        for (String s:combined) {
+        for (String s : combined) {
             if (tags.contains(s) && other.getTags().contains(s)) {
                 intersection++;
-            }
-            else if(tags.contains(s)) {
+            } else if (tags.contains(s)) {
                 uniqueS1++;
-            }
-            else {
+            } else {
                 uniqueS2++;
             }
         }
